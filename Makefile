@@ -1,7 +1,6 @@
-
-
-run:
-	export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-16.0.1.jdk/Contents/Home
-	gcc -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/darwin" -dynamiclib -o libhello.dylib HelloJNI.c
-	java -Djava.library.path=. HelloJNI
-
+# start at src/myjni
+javac -h . HelloJNI.java
+gcc -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/darwin" -dynamiclib -o libhello.dylib HelloJNI.c
+cd ..
+gcc -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/darwin" -dynamiclib -o libhello.dylib myjni/HelloJNI.c
+java -Djava.library.path=. myjni/HelloJNI
