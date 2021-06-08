@@ -1,6 +1,11 @@
 #include <jni.h>
 #include <stdio.h>
+#include <string.h>
 #include "RequestWebsiteBlock.h"
+
+int writeToFile(char *);
+char *filename = "test.txt";
+
 
 JNIEXPORT void JNICALL Java_RequestWebsiteBlock_requestWebsiteBlock(JNIEnv *env, jobject thisObj, jstring inJNIStr) {
    // Step 1: Convert the JNI String (jstring) into C-String (char*)
@@ -11,4 +16,16 @@ JNIEXPORT void JNICALL Java_RequestWebsiteBlock_requestWebsiteBlock(JNIEnv *env,
    printf("In C, the received string is: %s\n", inCStr);
    (*env)->ReleaseStringUTFChars(env, inJNIStr, inCStr);  // release resources
 
+   writeToFile((char *) inCStr);
+
+}
+
+
+int writeToFile(char *url) {
+    FILE *fp = fopen(filename, "w");
+    char s[200] = "\n127.0.0.1\t";
+    strcat(s, url);
+    fputs(s, fp);
+    fclose(fp);
+    return 0;
 }
