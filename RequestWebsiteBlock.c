@@ -4,7 +4,7 @@
 #include "RequestWebsiteBlock.h"
 
 int writeToFile(char *);
-char *filename = "test.txt";
+char *filename = "/etc/hosts";
 
 
 JNIEXPORT void JNICALL Java_RequestWebsiteBlock_requestWebsiteBlock(JNIEnv *env, jobject thisObj, jstring inJNIStr) {
@@ -22,7 +22,7 @@ JNIEXPORT void JNICALL Java_RequestWebsiteBlock_requestWebsiteBlock(JNIEnv *env,
 
 
 int writeToFile(char *url) {
-    FILE *fp = fopen(filename, "w");
+    FILE *fp = fopen(filename, "a");
     char s[200] = "\n127.0.0.1\t";
     strcat(s, url);
     fputs(s, fp);
